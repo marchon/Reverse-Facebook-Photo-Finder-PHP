@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+	<head>
+  <title>Brag College - FaceBook Reverse Image Lookup</title>
+	<meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="search.css" media="all">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+function showUser(str) {
+  if (str=="") {
+    document.getElementById("txtHint").innerHTML="";
+    return;
+   }
+  if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+   }
+  else {// code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+   }
+    xmlhttp.onreadystatechange=function()
+   {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+  xmlhttp.open("GET","/facebook/reverse/search/?fname="+str,true);
+  xmlhttp.send();
+  }
+  //]]>
+  </script>
+  <style>
+  .button {
+    background-color: #5A74A9;
+    border-radius: 7px 7px 7px 7px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px;
+}
+
+.buttonborder {
+    border: 1px solid #1A3073;
+}
+  </style>
+</head>
+<body>
+  <div id="container">
+
+    <div id="head">
+      <div id="tag"><h1><center>FaceBook Reverse Image Lookup</center></h1>
+  </div>
+    </div>
+    <div id="body">		
+      <div id="updates">
+        <form action="/facebook/reverse/search/" method="post">
+          <label class="header" for="q">Reverse Facebook Photo: </label>
+          <input id="q" name="fname" type="text"/>
+          <input id="search" class="button buttonborder" type="button" value="Search" onclick="showUser(fname.value)">
+        </form>
+
+
+
+  
+  
+  
+        
+        <div id="results"></div>
+          <center><div class="c1" id="txtHint">
+    Image info will be listed below.
+  </div></center>
+        <div class="waitloading"><img src='images/spinner.gif'></div>
+        <div id="finished">No more results. Try another search!</div>
+        </div>
+      </div>
+    </div>
+	</body>
+</html>
+
+	
